@@ -10,7 +10,7 @@ local HttpService = game:GetService("HttpService")
 -- // CONFIGURATION \\ --
 local Config = {
     HubName = "UtopiaHub",
-    ScriptURL = "https://seusite.com/seuscript.lua", -- COLOCA SEU LINK AQUI
+    ScriptURL = "https://raw.githubusercontent.com/Luixs1123/Luix/main/lux.lua", -- ✅ SEU LINK
     DiscordInvite = "GMeJJAYqKQ",
     AccentColor = Color3.fromRGB(114, 137, 218),
     BackgroundColor = Color3.fromRGB(20, 20, 20)
@@ -122,12 +122,17 @@ LoadBtn.MouseButton1Click:Connect(function()
     StatusLabel.Text = "Loading..."
     StatusLabel.TextColor3 = Color3.fromRGB(200,200,200)
 
-    -- EXECUTA SCRIPT DIRETO
-    loadstring(game:HttpGet(Config.ScriptURL, true))()
+    local success, err = pcall(function()
+        loadstring(game:HttpGet(Config.ScriptURL, true))()
+    end)
 
-    task.wait(0.5)
-    StatusLabel.Text = "Loaded!"
-    StatusLabel.TextColor3 = Color3.fromRGB(100,255,100)
+    if success then
+        StatusLabel.Text = "Loaded!"
+        StatusLabel.TextColor3 = Color3.fromRGB(100,255,100)
+    else
+        StatusLabel.Text = "Erro ao carregar"
+        warn(err)
+    end
 end)
 
 -- BOTÃO DISCORD
