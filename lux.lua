@@ -10,7 +10,7 @@ local HttpService = game:GetService("HttpService")
 -- // CONFIGURATION \\ --
 local Config = {
     HubName = "UtopiaHub",
-    ScriptURL = "https://raw.githubusercontent.com/Luixs1123/Luix/main/lux.lua", -- ✅ SEU LINK
+    ScriptURL = "https://raw.githubusercontent.com/Luixs1123/Luix/main/lux.lua",
     DiscordInvite = "GMeJJAYqKQ",
     AccentColor = Color3.fromRGB(114, 137, 218),
     BackgroundColor = Color3.fromRGB(20, 20, 20)
@@ -122,20 +122,13 @@ LoadBtn.MouseButton1Click:Connect(function()
     StatusLabel.Text = "Loading..."
     StatusLabel.TextColor3 = Color3.fromRGB(200,200,200)
 
-    local success, err = pcall(function()
-        loadstring(game:HttpGet(Config.ScriptURL, true))()
-    end)
+    loadstring(game:HttpGet(Config.ScriptURL, true))()
 
-    if success then
-        StatusLabel.Text = "Loaded!"
-        StatusLabel.TextColor3 = Color3.fromRGB(100,255,100)
-    else
-        StatusLabel.Text = "Erro ao carregar"
-        warn(err)
-    end
+    StatusLabel.Text = "Loaded!"
+    StatusLabel.TextColor3 = Color3.fromRGB(100,255,100)
 end)
 
--- BOTÃO DISCORD
+-- DISCORD
 local DiscordBtn = Create("TextButton", {
     Parent = MainFrame,
     BackgroundColor3 = Color3.fromRGB(88,101,242),
@@ -155,5 +148,4 @@ end)
 
 MakeDraggable(MainFrame)
 
--- ANIMAÇÃO
 TweenService:Create(Blur, TweenInfo.new(0.8), {Size = 20}):Play()
